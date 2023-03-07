@@ -9,15 +9,21 @@ namespace CSharpCollections
     public class BusRoutes
     {
         public int Number { get; set; }
-        public string Origin { get; }
-        public string Destination { get; }
-        public BusRoutes(int number, string origin, string destination)
+        public string Origin => PlacesServed[0];
+        public string Destination => PlacesServed[^1];
+
+        public string[] PlacesServed { get; }
+        public BusRoutes(int number, string[] placesServed)
         {
             Number = number;
-            Origin = origin;
-            Destination = destination;
+            PlacesServed = placesServed;
         }
 
         public override string ToString() => $"{Number}: {Origin} -> {Destination}";
+
+        public bool Serves(string destination)
+        {
+            return Array.Exists(PlacesServed, placeServed => placeServed == destination);
+        }
     }
 }
