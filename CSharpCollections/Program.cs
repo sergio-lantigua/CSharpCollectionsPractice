@@ -58,18 +58,34 @@
             #endregion
 
             #region Finding data in array
-            BusRoutes[] allRoutes = BusRouteRepository.InitializeRoutes();
+            //BusRoutes[] allRoutes = BusRouteRepository.InitializeRoutes();
 
-            Console.WriteLine("Where do you want to go");
-            string location = Console.ReadLine();
+            //Console.WriteLine("Where do you want to go");
+            //string location = Console.ReadLine();
 
-            BusRoutes[] routes = FindBusesTo(allRoutes, location);
+            //BusRoutes[] routes = FindBusesTo(allRoutes, location);
 
-            if(routes.Length > 0)
-                foreach (BusRoutes route in routes)
-                    Console.WriteLine($"You can use route {route}");
-            else
-                Console.WriteLine($"No routes go to {location}");
+            //if(routes.Length > 0)
+            //    foreach (BusRoutes route in routes)
+            //        Console.WriteLine($"You can use route {route}");
+            //else
+            //    Console.WriteLine($"No routes go to {location}");
+            #endregion
+
+            #region Working with List<>
+            List<BusRoutes> routes = BusRouteRepository.InitializeRoutesList();
+            Console.WriteLine($"Before: There are {routes.Count} routes:");
+            foreach (BusRoutes route in routes)
+            {
+                Console.WriteLine($"Route: {route}");
+            }
+
+            routes.RemoveAll(route => route.Origin.StartsWith("Test"));
+            Console.WriteLine($"After: There are {routes.Count} routes:");
+            foreach (BusRoutes route in routes)
+            {
+                Console.WriteLine($"Route: {route}");
+            }
             #endregion
         }
 
